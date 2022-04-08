@@ -21,9 +21,15 @@ export const Header = () => {
           <div css={ styles.humbergerMenu }>
             <div css={ styles.humbergerBlock }>
               <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li>
+                  <span>1</span>
+                </li>
+                <li>
+                  <span>2</span>
+                </li>
+                <li>
+                  <span>3</span>
+                </li>
               </ul>
             </div>
           </div>
@@ -78,5 +84,8 @@ const styles = {
   humbergerMenu: css`
     width: 100%;
     height: calc(100vh - 82px);
+    ul li span {
+      color: #c0c0c0;
+    }
   `,
 }
