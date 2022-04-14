@@ -1,11 +1,47 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { css } from '@emotion/react'
 
 export const Header = () => {
   const [ active, setActive ] = useState(false)
-  const hambergerClick = () => {
+  const [humbergerAreaHeight, setHumbergerAreaHeight] = useState(0)
+  const processing = useRef(false)
+  const height = useWindowHeight()
+  const wait1 = () =>
+    new Promise((resolve) => {
+      setTimeout(() => resolve(), 1);
+    })
+  const hambergerClick = async () => {
+    // against click hits
+    if (processing.current) return
+    processing.current = true
+
+    if (active) {
+      for (let i = height; i > 0; i--) {
+        if (i % 20 === 0) {
+          await wait1()
+        }
+        setHumbergerAreaHeight(i - 1)
+      }
+    } else {
+      for (let i = 0; i < height; i++) {
+        if (i % 20 === 0) {
+          await wait1()
+        }
+        setHumbergerAreaHeight(i + 1)
+      }
+    }
     setActive(!active)
+    setTimeout(() => {
+      processing.current = false;
+    }, 300);
   }
+  const humbergerAreaStyle = active || humbergerAreaHeight ? {
+    display: 'block',
+    height: humbergerAreaHeight,
+  } : {
+    display: 'none',
+  }
+
   return (
     <div>
       <div css={ styles.logoArea }>
@@ -16,7 +52,7 @@ export const Header = () => {
         <span></span>
         <span></span>
       </div>
-      <div css={ styles.humbergerArea } style={{ display: active ? 'block' : 'none' }}>
+      <div css={ styles.humbergerArea } style={humbergerAreaStyle}>
         <div css={ styles.humbergerWrapper }>
           <div css={ styles.humbergerMenu }>
             <div css={ styles.humbergerBlock }>
@@ -37,6 +73,19 @@ export const Header = () => {
       </div>
     </div>
   )
+}
+
+function useWindowHeight() {
+  const [windowHeight, setWindowHeight] = useState(0)
+  useEffect(() => {
+    function handleResize() {
+      setWindowHeight(window.innerHeight)
+    }
+    window.addEventListener("resize", handleResize)
+    handleResize()
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+  return windowHeight
 }
 
 const styles = {
@@ -71,15 +120,12 @@ const styles = {
     }
   `,
   humbergerArea: css`
-    transition: all 0.3s ease;
     background-color: #000;
     position: fixed;
     width: 100%;
-    top: 0;
     right: 0;
   `,
   humbergerWrapper: css`
-    margin-top: 82px;
   `,
   humbergerMenu: css`
     width: 100%;
