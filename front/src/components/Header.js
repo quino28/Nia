@@ -14,23 +14,23 @@ export const Header = () => {
     // against click hits
     if (processing.current) return
     processing.current = true
+    setActive(!active)
 
     if (active) {
-      for (let i = height; i > 0; i--) {
-        if (i % 20 === 0) {
-          await wait1()
-        }
-        setHumbergerAreaHeight(i - 1)
-      }
-    } else {
       for (let i = 0; i < height; i++) {
         if (i % 20 === 0) {
           await wait1()
         }
         setHumbergerAreaHeight(i + 1)
       }
+    } else {
+      for (let i = height; i > 0; i--) {
+        if (i % 20 === 0) {
+          await wait1()
+        }
+        setHumbergerAreaHeight(i - 1)
+      }
     }
-    setActive(!active)
     setTimeout(() => {
       processing.current = false;
     }, 300);
@@ -47,7 +47,7 @@ export const Header = () => {
       <div css={ styles.logoArea }>
         <h1>Logo</h1>
       </div>
-      <div css={ styles.humbergerSwitch } onClick={hambergerClick}>
+      <div className={ active ? 'on' : '' } css={ styles.humbergerSwitch } onClick={ hambergerClick }>
         <span></span>
         <span></span>
         <span></span>
@@ -108,15 +108,31 @@ const styles = {
       right: 5px;
       width: 36px;
       height: 2px;
+      transition: all .4s;
+      &:nth-of-type(1) {
+        top: 12px;
+      }
+      &:nth-of-type(2) {
+        top: 22px;
+      }
+      &:nth-of-type(3) {
+        top: 32px;
+      }
     }
-    span:nth-of-type(1) {
-      top: 12px;
-    }
-    span:nth-of-type(2) {
-      top: 22px;
-    }
-    span:nth-of-type(3) {
-      top: 32px;
+    &.on {
+      span:nth-of-type(1) {
+        top: 9px;
+        transform: translateY(14px) rotate(45deg);
+      }
+      span:nth-of-type(2) {
+        right: -50%;
+        opacity: 0;
+        animation: active-menu-bar02 .8s forwards;
+      }
+      span:nth-of-type(3) {
+        top: 37px;
+        transform: translateY(-14px) rotate(-45deg);
+      }
     }
   `,
   humbergerArea: css`
