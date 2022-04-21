@@ -120,18 +120,20 @@ const styles = {
       }
     }
     &.on {
-      span:nth-of-type(1) {
-        top: 9px;
-        transform: translateY(14px) rotate(45deg);
-      }
-      span:nth-of-type(2) {
-        right: -50%;
-        opacity: 0;
-        animation: active-menu-bar02 .8s forwards;
-      }
-      span:nth-of-type(3) {
-        top: 37px;
-        transform: translateY(-14px) rotate(-45deg);
+      span {
+        &:nth-of-type(1) {
+          top: 9px;
+          transform: translateY(14px) rotate(45deg);
+        }
+        &:nth-of-type(2) {
+          right: -50%;
+          opacity: 0;
+          animation: active-menu-bar02 .8s forwards;
+        }
+        &:nth-of-type(3) {
+          top: 37px;
+          transform: translateY(-14px) rotate(-45deg);
+        }
       }
     }
   `,
