@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from 'react-router-dom';
 import { css } from '@emotion/react'
 
 export const Header = () => {
@@ -17,18 +18,20 @@ export const Header = () => {
     setActive(!active)
 
     if (active) {
-      for (let i = 0; i < height; i++) {
-        if (i % 20 === 0) {
-          await wait1()
-        }
-        setHumbergerAreaHeight(i + 1)
-      }
-    } else {
+      // close humberger menu
       for (let i = height; i > 0; i--) {
         if (i % 20 === 0) {
           await wait1()
         }
         setHumbergerAreaHeight(i - 1)
+      }
+    } else {
+      // show humberger menu
+      for (let i = 0; i < height; i++) {
+        if (i % 20 === 0) {
+          await wait1()
+        }
+        setHumbergerAreaHeight(i + 1)
       }
     }
     setTimeout(() => {
@@ -45,9 +48,11 @@ export const Header = () => {
   return (
     <div>
       <div css={ styles.logoArea }>
-        <h1>Logo</h1>
+        <h1>
+          <Link to="/">Logo</Link>
+        </h1>
       </div>
-      <div className={ active ? '' : 'on' } css={ styles.humbergerSwitch } onClick={ hambergerClick }>
+      <div className={ active && 'on' } css={ styles.humbergerSwitch } onClick={ hambergerClick }>
         <span></span>
         <span></span>
         <span></span>
