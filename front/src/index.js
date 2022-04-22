@@ -16,6 +16,9 @@ ReactDOM.render(
         -webkit-font-smoothing: antialiased;
         font-smoothing: antialiased;
       }
+      a {
+        text-decoration: none;
+      }
     `} />
     <App />
   </React.StrictMode>,
