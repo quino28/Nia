@@ -5,11 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import emotionReset from 'emotion-reset';
 import { Global, css } from '@emotion/react';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 ReactDOM.render(
   <React.StrictMode>
     <Global styles={css`
       ${emotionReset}
+        overflow: hidden;{
       *, *::after, *::before {
         box-sizing: border-box;
         -moz-osx-font-smoothing: grayscale;

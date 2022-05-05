@@ -57,7 +57,7 @@ export const Header = () => {
         <span></span>
         <span></span>
       </div>
-      <div css={ styles.humbergerArea } style={humbergerAreaStyle}>
+      <div css={ styles.humbergerArea } style={ humbergerAreaStyle }>
         <div css={ styles.humbergerWrapper }>
           <div css={ styles.humbergerMenu }>
             <div css={ styles.humbergerBlock }>
